@@ -1,0 +1,20 @@
+version: '1'
+services:
+    db:
+        image: postgres:14.1
+        restart: always
+        environment:
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=postgres
+        ports:
+          - '5432:5432'
+        volumes:
+          - /Users/ulana/bachelor_project/volumes/postgresdata:/var/lib/postgresql/data
+          - /Users/ulana/bachelor_project/volumes/postgresconfig:/db_config
+          - /Users/ulana/bachelor_project/volumes/script/script.sql:/docker-entrypoint-initdb.d/script.sql
+    site:
+        image: restaurantsite:1.1
+        restart: always
+        ports:
+        - '8083:8083'
+    
